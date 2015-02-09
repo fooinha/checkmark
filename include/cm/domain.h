@@ -114,10 +114,10 @@ class domain : public error_check {
 
 
 		/**
-		* @brief Constructs a domain from a std::string.
-		*
-		* @param in The input argument.
-		*/
+		 * @brief Constructs a domain from a std::string.
+		 *
+		 * @param in The input argument.
+		 */
 		domain(const std::string &in) : _value(in) {
 
 			if (in.empty()) {
@@ -197,8 +197,8 @@ class domain : public error_check {
 
 							// * Digits 0 to 9 (ASCII: 48–57)
 							if (c >= 48 && c<= 57) {
-								++cnt_digits;
-								return true;
+							++cnt_digits;
+							return true;
 							}
 
 							// * Dots and hyphens
@@ -218,8 +218,8 @@ class domain : public error_check {
 				}
 
 				if (cnt_digits == in.size()) {
-						_err = "The domain name is composed only by digit characters." ;
-						return;
+					_err = "The domain name is composed only by digit characters." ;
+					return;
 				}
 
 			}

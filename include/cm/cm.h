@@ -3,16 +3,15 @@
 
 
 /**
-   @namespace cm
-   @brief Toolbox of classes
-*/
+  @namespace cm
+  @brief Toolbox of classes
+ */
 
 #include <cm/validator.h>
 #include <cm/stopwatch.h>
 
 #include <cm/domain.h>
 #include <cm/smtp.h>
-//#include <cm/net.h>
 #include <cm/url.h>
 #include <cm/media.h>
 

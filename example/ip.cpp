@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 		std::cout << line;
 
 
-		//	throw exceptions if syntax err is found
+		//throw exceptions if syntax err is found
 		try {
 
 			if (is_ipv6) {

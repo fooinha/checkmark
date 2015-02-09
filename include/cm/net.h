@@ -20,75 +20,75 @@ namespace net {
 
 /// @cond INTERNAL_DETAIL
 namespace detail {
-	/**
-	 * @brief
-	 *
-	 * @param af
-	 * @param addr
-	 *
-	 * @return
-	 */
-	inline bool is_ip(int af, const std::string &addr, unsigned char *buf ) {
+/**
+ * @brief
+ *
+ * @param af
+ * @param addr
+ *
+ * @return
+ */
+inline bool is_ip(int af, const std::string &addr, unsigned char *buf ) {
 
-		if ( inet_pton(af, addr.c_str(), (void *) buf) > 0 )
-			return true;
+	if ( inet_pton(af, addr.c_str(), (void *) buf) > 0 )
+		return true;
 
-		return false;
+	return false;
 
-	}
+}
 } // namespace detail
 /// @endcond
 
 namespace exceptions {
-	/**
-	 * @class invalid_ip_address
-	 * @brief An exception class to indicate that an address could not be construted because
-	 *        of an invalid input.
-	 */
-	class invalid_ip_address : public std::invalid_argument {
-		// C++11 inheriting constructors
-		using invalid_argument::invalid_argument;
-	};
+/**
+ * @class invalid_ip_address
+ * @brief An exception class to indicate that an address could not be construted because
+ *        of an invalid input.
+ */
+class invalid_ip_address : public std::invalid_argument {
+	// C++11 inheriting constructors
+	using invalid_argument::invalid_argument;
+};
 
-	/**
-	 * @class invalid_ipv4_address
-	 * @brief An exception class to indicate that an address could not be construted because
-	 *        of an invalid input.
-	 */
-	class invalid_ipv4_address : public std::invalid_argument {
-		// C++11 inheriting constructors
-		using invalid_argument::invalid_argument;
-	};
+/**
+ * @class invalid_ipv4_address
+ * @brief An exception class to indicate that an address could not be construted because
+ *        of an invalid input.
+ */
+class invalid_ipv4_address : public std::invalid_argument {
+	// C++11 inheriting constructors
+	using invalid_argument::invalid_argument;
+};
 
-	/**
-	 * @class invalid_ipv6_address
-	 * @brief An exception class to indicate that an address could not be construted because
-	 *        of an invalid input.
-	 */
-	class invalid_ipv6_address : public std::invalid_argument {
-		// C++11 inheriting constructors
-		using invalid_argument::invalid_argument;
-	};
+/**
+ * @class invalid_ipv6_address
+ * @brief An exception class to indicate that an address could not be construted because
+ *        of an invalid input.
+ */
+class invalid_ipv6_address : public std::invalid_argument {
+	// C++11 inheriting constructors
+	using invalid_argument::invalid_argument;
+};
 
-	/**
-	 * @class invalid_cidr
-	 * @brief An exception class to indicate that a CIDR could not be construted because
-	 *        of an invalid input.
-	 */
-	class invalid_cidr : public std::invalid_argument {
-		// C++11 inheriting constructors
-		using invalid_argument::invalid_argument;
-	};
+/**
+ * @class invalid_cidr
+ * @brief An exception class to indicate that a CIDR could not be construted because
+ *        of an invalid input.
+ */
+class invalid_cidr : public std::invalid_argument {
+	// C++11 inheriting constructors
+	using invalid_argument::invalid_argument;
+};
 
-	/**
-	 * @class invalid_port
-	 * @brief An exception class to indicate that a TCP/UDP port could not be construted because
-	 *        of an invalid input.
-	 */
-	class invalid_port : public std::invalid_argument {
-		// C++11 inheriting constructors
-		using invalid_argument::invalid_argument;
-	};
+/**
+ * @class invalid_port
+ * @brief An exception class to indicate that a TCP/UDP port could not be construted because
+ *        of an invalid input.
+ */
+class invalid_port : public std::invalid_argument {
+	// C++11 inheriting constructors
+	using invalid_argument::invalid_argument;
+};
 
 
 } // namespace exceptions
@@ -112,40 +112,40 @@ class port: public error_check {
 		 * @param in
 		 */
 		template< class T = std::string>
-		port(const T& in) {
+			port(const T& in) {
 
-			static_assert(std::is_base_of<range, T>::value || std::is_base_of<std::string, T>::value ,
-					"T must be a descendant of std::string or cm::range");
+				static_assert(std::is_base_of<range, T>::value || std::is_base_of<std::string, T>::value ,
+						"T must be a descendant of std::string or cm::range");
 
-			unsigned long p = 0;
-			error_check_assert(in.empty(), "Empty port!");
+				unsigned long p = 0;
+				error_check_assert(in.empty(), "Empty port!");
 
 
-			for(const auto &c : in ) {
+				for(const auto &c : in ) {
 
-				error_check_assert(! ::isdigit(c), "Invalid character for port.");
-				p *= 10;
+					error_check_assert(! ::isdigit(c), "Invalid character for port.");
+					p *= 10;
 
-				/* Converts digit character to int */
-				p += (c - 48);
+					/* Converts digit character to int */
+					p += (c - 48);
 
-				if (p > 65535)
-					error_check_assert(p > 65535, "Number for port too big.");
+					if (p > 65535)
+						error_check_assert(p > 65535, "Number for port too big.");
 
-				_value = p;
+					_value = p;
+
+				}
 
 			}
-
-		}
 		//TODO: integral based constructors
 		/*
-		port(int p) {
-				error_check_assert(p > 65535, "Number for port too big.");
-				error_check_assert(p < 0,     "Number for port cannot be negative.");
+			port(int p) {
+			error_check_assert(p > 65535, "Number for port too big.");
+			error_check_assert(p < 0,     "Number for port cannot be negative.");
 
-				_value = p;
+			_value = p;
 
-		}
+			}
 
 
 
@@ -154,13 +154,13 @@ class port: public error_check {
 		port (T p)
 		{
 
-				error_check_assert(p > 65535, "Number for port too big.");
-				error_check_assert(p < 0,     "Number for port cannot be negative.");
+		error_check_assert(p > 65535, "Number for port too big.");
+		error_check_assert(p < 0,     "Number for port cannot be negative.");
 
-				_value = p;
+		_value = p;
 
 		}
-		*/
+		 */
 		inline unsigned short int value() const { return _value; }
 
 	private:
@@ -279,7 +279,7 @@ class ip_literal_facade : public error_check {
 			}
 
 			if (std::count(in.begin(), in.end(), '[') != 1 ||
-				 std::count(in.begin(), in.end(), ']') != 1)   {
+				 	std::count(in.begin(), in.end(), ']') != 1)   {
 				set_error("Invalid literal value.");
 				return;
 			}
@@ -325,40 +325,40 @@ class ip : public error_check {
 
 	public:
 
-		/// The validator type
-		typedef cm::validator<ip<>, exceptions::invalid_ip_address> validator_type;
+	/// The validator type
+	typedef cm::validator<ip<>, exceptions::invalid_ip_address> validator_type;
 
-		ip(const ipv6 &in) : _value(in) {
-			error_check_assert(in.has_error(), in.error());
-		}
+	ip(const ipv6 &in) : _value(in) {
+		error_check_assert(in.has_error(), in.error());
+	}
 
-		ip(const ipv4 &in) : _value(in)  {
-			error_check_assert(in.has_error(), in.error());
-		}
+	ip(const ipv4 &in) : _value(in)  {
+		error_check_assert(in.has_error(), in.error());
+	}
 
-		ip(const std::string &in) : _value(in) {
+	ip(const std::string &in) : _value(in) {
 
-			/* Check if empty */
-			error_check_assert(in.empty(), "Empty IP string.");
+		/* Check if empty */
+		error_check_assert(in.empty(), "Empty IP string.");
 
-			bool must_be_ipv6 = ( in.find(':') != std::string::npos);
-			if (must_be_ipv6) {
+		bool must_be_ipv6 = ( in.find(':') != std::string::npos);
+		if (must_be_ipv6) {
 
-				ipv6 i(in);
-				error_check_assert(i.has_error(), i.error());
-				return;
-			}
-
-			ipv4 i(in);
+			ipv6 i(in);
 			error_check_assert(i.has_error(), i.error());
-
-
+			return;
 		}
+
+		ipv4 i(in);
+		error_check_assert(i.has_error(), i.error());
+
+
+	}
 
 	inline const I & value() const { return _value; }
 
 	private:
-		const I &_value;
+	const I &_value;
 };//template class resource
 
 
@@ -373,7 +373,7 @@ class ip : public error_check {
   IPv4: The prefix length can range from 0 to 32
   IPv6: The prefix length can range from 0 to 128
 
- */
+*/
 class cidr : public error_check {
 
 	private:
@@ -424,9 +424,9 @@ class cidr : public error_check {
 
 		}
 
-	inline const std::string &address() const { return _address; }
-	inline int prefix() const { return _prefix; }
-	inline bool is_ipv6() const { return _is_ipv6; }
+		inline const std::string &address() const { return _address; }
+		inline int prefix() const { return _prefix; }
+		inline bool is_ipv6() const { return _is_ipv6; }
 
 	private:
 		std::string  _address;

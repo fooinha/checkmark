@@ -32,7 +32,7 @@ int main(int argc, char **argv) {
 		// Parses and processes lines
 		if (with_exceptions)  {
 
-			//	throw exceptions if syntax err is found
+			// throw exceptions if syntax err is found
 			try {
 
 				cm::net::cidr addr = validator(line);

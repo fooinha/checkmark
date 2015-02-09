@@ -8,11 +8,6 @@
 
 int main(int argc, char **argv) {
 
-//	bool nil_uuid = false;
-//
-//	if (argc > 1)
-//		nil_uuid = true;
-
 	std::string line;
 
 	std::cout << "-----------------------------------------------------------------" << std::endl;
@@ -33,15 +28,7 @@ int main(int argc, char **argv) {
 		} else {
 			std::cout <<  " OK";
 		}
-/*
-		cm::numbers::american_express u(line);
 
-		if (u.has_error()) {
-			std::cout <<  " ERR : " << u.error();
-		} else {
-			std::cout <<  " OK";
-		}
-*/
 		w.stop();
 
 timings:

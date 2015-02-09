@@ -11,101 +11,98 @@ namespace net {
 
 /*
 
-	  Media type consists of top-level type name and subtype name, which is further structured into
-	so-called "trees". Media types can optionally define companion data, known as parameters.
+Media type consists of top-level type name and subtype name, which is further structured into
+so-called "trees". Media types can optionally define companion data, known as parameters.
 
 	top-level type name / subtype name [ ; parameters ]
 	top-level type name / [ tree. ] subtype name [ +suffix ] [ ; parameters ]
 
-	  The currently registered top-level type names are: application, audio, example, image, message,
-	model, multipart, text, video.
+The currently registered top-level type names are: application, audio, example, image, message,
+model, multipart, text, video.
 
-	  Subtype name typically consists of a media type name, but it may or must also contain other content,
-	such as tree prefix (facet), producer's name, product name or suffix - according the different rules
-	in registration trees.
+Subtype name typically consists of a media type name, but it may or must also contain other content,
+such as tree prefix (facet), producer's name, product name or suffix - according the different rules
+in registration trees.
 
-	https://www.iana.org/assignments/media-types/media-types.xhtml
+https://www.iana.org/assignments/media-types/media-types.xhtml
 
-	http://tools.ietf.org/html/rfc4288#section-3.1
+http://tools.ietf.org/html/rfc4288#section-3.1
 
-	Type and subtype names MUST conform to the following ABNF:
+Type and subtype names MUST conform to the following ABNF:
 
-       type-name = reg-name
-       subtype-name = reg-name
+	type-name = reg-name
+	subtype-name = reg-name
 
 
 */
 namespace media {
-
 namespace details {
 
-		/*
+/*
+	http://tools.ietf.org/html/rfc4288#section-4.2
 
+	reg-name = 1*127reg-name-chars
+	reg-name-chars = ALPHA / DIGIT / "!" /
+	"#" / "$" / "&" / "." /
+	"+" / "-" / "^" / "_"
+*/
 
-		 http://tools.ietf.org/html/rfc4288#section-4.2
+inline bool is_reg_name_char(char c) {
 
-       reg-name = 1*127reg-name-chars
-       reg-name-chars = ALPHA / DIGIT / "!" /
-                       "#" / "$" / "&" / "." /
-                       "+" / "-" / "^" / "_"
-		*/
-	 	inline bool is_reg_name_char(char c) {
+	// * Uppercase and lowercase English letters (a–z, A–Z) (ASCII: 65–90, 97–122)
+	if ((c >= 65 && c<= 90) || (c>=97 && c<= 122)) return true;
 
-		 	// * Uppercase and lowercase English letters (a–z, A–Z) (ASCII: 65–90, 97–122)
-		 	if ((c >= 65 && c<= 90) || (c>=97 && c<= 122)) return true;
+	// * Digits 0 to 9 (ASCII: 48–57)
+	if (c >= 48 && c<= 57) return true;
 
-		 	// * Digits 0 to 9 (ASCII: 48–57)
-		 	if (c >= 48 && c<= 57) return true;
+	if (c == '!' || c == '#' || c == '$' || c == '&' ||
+			c == '.' || c == '+' || c == '-' || c == '^' || c == '_' )
+		return true;
 
-			if (c == '!' || c == '#' || c == '$' || c == '&' ||
-				 c == '.' || c == '+' || c == '-' || c == '^' || c == '_' )
-				return true;
+	return false;
 
-			return false;
+}
 
-		}
+/*
+	http://tools.ietf.org/html/rfc2231#section-7
 
-		/*
-			http://tools.ietf.org/html/rfc2231#section-7
+	attribute-char := <any (US-ASCII) CHAR except SPACE, CTLs,
+	"*", "'", "%", or tspecials>
 
-			attribute-char := <any (US-ASCII) CHAR except SPACE, CTLs,
-				                  "*", "'", "%", or tspecials>
+	tspecials :=  "(" / ")" / "<" / ">" / "@" /
+	"," / ";" / ":" / "\" / <">
+	"/" / "[" / "]" / "?" / "="
+	; Must be in quoted-string,
+	; to use within parameter values
 
-			tspecials :=  "(" / ")" / "<" / ">" / "@" /
-				"," / ";" / ":" / "\" / <">
-				"/" / "[" / "]" / "?" / "="
-			; Must be in quoted-string,
-			; to use within parameter values
+*/
 
+inline bool is_tspecial(char c) {
 
-		 */
+	if (c == '(' || c == ')' || c == '<' || c == '>' || c == '@' ||
+			c == ',' || c == ';' || c == ':' || c == '\\' || c == '"' ||
+			c == '/' || c == '[' || c == ']' || c == '?' || c == '=')
+		return true;
 
-		inline bool is_tspecial(char c) {
+	return false;
 
-			if (c == '(' || c == ')' || c == '<' || c == '>' || c == '@' ||
- 			 c == ',' || c == ';' || c == ':' || c == '\\' || c == '"' ||
-			 c == '/' || c == '[' || c == ']' || c == '?' || c == '=')
-				return true;
+}
 
-			return false;
+inline bool is_attribute_char(char c, bool quoted) {
 
-		}
+	/* SPACE and CTLs */
+	if (c <= 32 || c == 127)
+		return false;
 
-		inline bool is_attribute_char(char c, bool quoted) {
+	if ( c == '*' || c == '\'' || c == '%')
+		return false;
 
-			/* SPACE and CTLs */
-			if (c <= 32 || c == 127)
-				return false;
+	if (! quoted && is_tspecial(c))
+		return false;
 
-			if ( c == '*' || c == '\'' || c == '%')
-				return false;
+	return true;
 
-			if (! quoted && is_tspecial(c))
-				return false;
-
-			return true;
-
-		}
+}
 
 
 }//namespace details
@@ -154,13 +151,13 @@ class attribute : public error_check {
 						[&]
 						(char &c ){
 
-							++pos;
-							if (c == '"' && previous != '\\') return false;
-							previous = c;
+						++pos;
+						if (c == '"' && previous != '\\') return false;
+						previous = c;
 
-							return details::is_attribute_char(c, quoted);
+						return details::is_attribute_char(c, quoted);
 						}
-					),
+						),
 
 					"Invalid characters in attribute string :" + std::to_string(pos+quoted)
 					);
@@ -186,10 +183,10 @@ struct parameter {
 
 
 /**
-* @brief
-*
-* //TODO: optional [ ; parameters ]
-*/
+ * @brief
+ *
+ * //TODO: optional [ ; parameters ]
+ */
 class type: public error_check {
 
 	private:
@@ -215,7 +212,7 @@ class type: public error_check {
 
 			_top = in.substr(0,type_sep);
 			error_check_assert(level::top.find(_top) == level::top.end(),
-				"Invalid top level type.");
+					"Invalid top level type.");
 
 
 			/* Check the subtype size and format */
@@ -223,10 +220,10 @@ class type: public error_check {
 			error_check_assert(_sub.empty(), "Empty subtype.");
 			error_check_assert(_sub.size() > 127, "Subtype is too big.");
 
-    	  	error_check_assert(
+			error_check_assert(
 					! std::all_of(_sub.begin(), _sub.end(), details::is_reg_name_char),
 					"Invalid characters in subtype."
-			);
+					);
 
 
 			size_t tree_sep = in.find_first_of('.');
@@ -236,7 +233,7 @@ class type: public error_check {
 			if (suffix_sep != std::string::npos) {
 				_suffix = std::string(in, suffix_sep+1);
 				error_check_assert(level::suffix.find(_suffix) == level::suffix.end(),
-					"Invalid suffix.");
+						"Invalid suffix.");
 			}
 
 			/* Check the subtype tree if exists */
@@ -246,10 +243,10 @@ class type: public error_check {
 				_tree = std::string(in, type_sep+1, min-type_sep-1);
 
 				error_check_assert(_tree.empty(),
-					"Invalid subtype tree.");
+						"Invalid subtype tree.");
 
 				error_check_assert(level::tree.find(_tree) == level::tree.end(),
-					"Invalid subtype tree.");
+						"Invalid subtype tree.");
 			}
 
 		}

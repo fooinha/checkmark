@@ -22,8 +22,6 @@ int main(int argc, char **argv) {
 
 		std::cout << "-----------------------------------------------------------------" << std::endl;
 
-//		for(size_t i = 0; i < 7; ++i)
-//				std::cout << " ";
 
 		for(size_t i = 0; i < line.size() ; ++i) {
 			std::cout << (i % 10 ) ;
@@ -31,8 +29,6 @@ int main(int argc, char **argv) {
 
 		std::cout << std::endl;
 
-//		for(size_t i = 0; i < 7; ++i)
-//				std::cout << " ";
 
 		size_t j = 0;
 		for(size_t i = 0; i < line.size() ; ++i) {
@@ -55,16 +51,6 @@ int main(int argc, char **argv) {
 		} catch (std::invalid_argument &ex) {
 			std::cerr << " ERR:" << ex.what();
 		}
-/*
-	  //cm::url::http u(line);
-	  cm::url::mailto u(line);
-
-		if (u.has_error()) {
-			std::cout <<  " ERR : " << u.error();
-		} else {
-			std::cout <<  " OK";
-		}
-*/
 		w.stop();
 
 timings:

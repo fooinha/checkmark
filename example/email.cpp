@@ -34,7 +34,7 @@ int main(int argc, char **argv) {
 		// Parses and processes lines
 		if (with_exceptions)  {
 
-			//	throw exceptions if syntax err is found
+			// throw exceptions if syntax err is found
 			try {
 
 				cm::smtp::address addr = email_validator(line);
@@ -57,9 +57,6 @@ int main(int argc, char **argv) {
 				std::cout <<  " ERR : " << addr.error();
 			} else {
 				std::cout <<  " OK";
-	//			std::cerr << " LOCAL:" << addr.get_local_part().value() << std::endl;
-	//			std::cerr << "       DOMAIN:" << addr.get_domain().value() << std::endl;
-	//			std::cerr << "DOMAIN LABELS:" << addr.get_domain().labels().size() << std::endl;
 			}
 
 		}
@@ -76,8 +73,6 @@ timings:
 		std::cout << " # GOOD:" << email_validator.good() << std::endl;
 		std::cout << "  # BAD:" << email_validator.bad() << std::endl;
 
-//		std::cout << " # GOOD:" << domain_validator.good() << std::endl;
-//		std::cout << "  # BAD:" << domain_validator.bad() << std::endl;
 	}
 
 	return 0;

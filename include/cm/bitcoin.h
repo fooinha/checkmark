@@ -36,25 +36,24 @@ class address : public error_check {
 
 	public:
 
-	// The validator type
-	typedef cm::validator<address, exceptions::invalid_address> validator_type;
+		// The validator type
+		typedef cm::validator<address, exceptions::invalid_address> validator_type;
 
-	address(const std::string &in) {
+		address(const std::string &in) {
 
-		error_check_assert(in.empty(), "Empty Bitcoin address.");
-		error_check_assert(in.front() != '1' || in.front() != '3' , "Invalid Bitcoin address version.");
-		error_check_assert(in.size() < 26 ||  in.size() > 35 , "Invalid Bitcoin address size.");
-		error_check_assert( ! std::all_of(in.begin(), in.end(), ::isalpha),
-				"Invalid Bitcoin non alphanumeric character.");
+			error_check_assert(in.empty(), "Empty Bitcoin address.");
+			error_check_assert(in.front() != '1' || in.front() != '3' , "Invalid Bitcoin address version.");
+			error_check_assert(in.size() < 26 ||  in.size() > 35 , "Invalid Bitcoin address size.");
+			error_check_assert( ! std::all_of(in.begin(), in.end(), ::isalpha),
+					"Invalid Bitcoin non alphanumeric character.");
 
-		//TODO: TO perform hash validation
-
-		_value = in;
-	}
+			//TODO: TO perform hash validation
+			_value = in;
+		}
 
 	private:
 
-	std::string _value;
+		std::string _value;
 
 
 

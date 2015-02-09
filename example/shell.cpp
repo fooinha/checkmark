@@ -10,6 +10,15 @@
 #include <cm/uuid.h>
 #include <cm/media.h>
 
+/*
+
+ INPUT:
+
+ > mode   // changes parsing mode
+ value
+
+*/
+
 int main(int arg, char **argv) {
 
 	enum MODE {
@@ -26,7 +35,7 @@ int main(int arg, char **argv) {
 	};
 
 	const std::map<std::string,MODE> modes_names(
-		{
+			{
 			{ "url", M_URL },
 			{ "email", M_EMAIL},
 			{ "literal_ip", M_LITERAL_IP},
@@ -36,8 +45,8 @@ int main(int arg, char **argv) {
 			{ "domain", M_DOMAIN},
 			{ "attribute", M_ATTRIBUTE},
 			{ "media-type", M_MEDIA_TYPE}
-		}
-	);
+			}
+			);
 
 	MODE current = M_NONE;
 	std::string mode_arguments;
@@ -102,76 +111,83 @@ int main(int arg, char **argv) {
 
 		switch(current) {
 
-			case M_URL: {
-
+			case M_URL:
+				{
 					auto a = cm::url::factory::create(line);
 					std::cout << (cm::error_check) (*a);
 					break;
-			}
+				}
 
-			case M_EMAIL: {
-
+			case M_EMAIL:
+				{
 					cm::smtp::address a(line);
 					std::cout << (cm::error_check) (a);
 
 					break;
-			}
+				}
 
-			case M_CIDR: {
+			case M_CIDR:
+				{
 
 					cm::net::cidr a(line);
 					std::cout << (cm::error_check) (a);
 
 					break;
-			}
+				}
 
-			case M_UUID: {
+			case M_UUID:
+				{
 
 					cm::uuid::uuid a(line);
 					std::cout << (cm::error_check) (a);
 
 					break;
-			}
+				}
 
-			case M_LITERAL_IP: {
+			case M_LITERAL_IP:
+				{
 
 					cm::net::ip_literal_facade a(line, false);
 					std::cout << (cm::error_check) (a);
 
 					break;
-			}
+				}
 
-			case M_IP: {
+			case M_IP:
+				{
 
 					cm::net::ip<> a(line);
 					std::cout << (cm::error_check) (a);
 
 					break;
-			}
+				}
 
-			case M_DOMAIN: {
+			case M_DOMAIN:
+				{
 
 					cm::dns::domain a(line);
 					std::cout << (cm::error_check) (a);
 
 					break;
-			}
+				}
 
-			case M_ATTRIBUTE: {
+			case M_ATTRIBUTE:
+				{
 
 					cm::net::media::attribute a(line);
 					std::cout << (cm::error_check) (a);
 
 					break;
-			}
+				}
 
-			case M_MEDIA_TYPE: {
+			case M_MEDIA_TYPE:
+				{
 
 					cm::net::media::type a(line);
 					std::cout << (cm::error_check) (a);
 
 					break;
-			}
+				}
 
 
 			case M_NONE:
