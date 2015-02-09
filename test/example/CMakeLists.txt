@@ -1,0 +1,12 @@
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
+add_executable(stopwatch    stopwatch.cpp)
+add_executable(million      million.cpp)
+add_executable(email        email.cpp)
+add_executable(ip           ip.cpp)
+add_executable(cidr         cidr.cpp)
+add_executable(port         port.cpp)
+add_executable(uuid         uuid.cpp)
+add_executable(luhn         luhn.cpp)
+add_executable(url          url.cpp)
+add_executable(shell        shell.cpp)

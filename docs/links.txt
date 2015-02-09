@@ -1,0 +1,27 @@
+https://fightingforalostcause.net/content/misc/2006/compare-email-regex.php
+http://svn.apache.org/viewvc/james/protocols/trunk/smtp/src/main/java/org/apache/james/protocols/smtp/MailAddress.java?view=markup
+
+http://commons.apache.org/proper/commons-validator/apidocs/src-html/org/apache/commons/validator/routines/EmailValidator.html
+
+http://en.wikipedia.org/wiki/Email_address
+http://en.wikipedia.org/wiki/Extended_SMTP
+
+http://tools.ietf.org/html/rfc6531
+http://www.postfix.org/SMTPUTF8_README.html
+
+https://pypi.python.org/pypi/validate_email
+https://github.com/oodle/email-parse/tree/master/src
+
+https://github.com/StoneCypher/testdata-valid-email
+
+http://stackoverflow.com/questions/27474/email-smtp-validator
+http://formvalidation.io/validators/emailAddress/
+
+http://stackoverflow.com/questions/17002279/what-are-the-valid-characters-in-the-domain-part-of-e-mail-address
+ ** comments and whitespace doubts **
+
+http://www.helpsystems.com/intermapper/ipv6-address-validation
+http://static.helpsystems.com/intermapper/third-party/test-ipv6-regex.pl
+http://crisp.tweakblogs.net/blog/2031/ipv6-validation-%28and-caveats%29.html
+
+http://commons.apache.org/proper/commons-validator/

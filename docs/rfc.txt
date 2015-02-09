@@ -1,0 +1,7 @@
+ == SMTP ==
+
+[RFC Search SMTP](http://www.rfc-editor.org/search/rfc_search_detail.php?title=SMTP&pubstatus%5B%5D=Any&pub_date_type=any)
+
+== EMAIL ==
+
+[RFC Search Email](http://www.rfc-editor.org/search/rfc_search_detail.php?page=All&title=Email&pubstatus[]=Any&pub_date_type=any&sortkey=Number&sorting=ASC)
