@@ -17,6 +17,7 @@ endmacro()
 #==========================================================================
 
 project(checkmark C CXX)
+set(PROJECT_VERSION 0.0.1)
 
 include_directories(include)
 add_definitions(-std=c++11)
