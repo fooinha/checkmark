@@ -19,35 +19,36 @@
 
 
  RFC 3986 and http://www.w3.org/Addressing/URL/uri-spec.html.
-http://en.wikipedia.org/wiki/URI_scheme#Generic_syntax
+ http://en.wikipedia.org/wiki/URI_scheme#Generic_syntax
 
-=== GENERIC SYNTAX ===
+ === GENERIC SYNTAX ===
 
-foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose
-\_/   \_______________/ \_________/ \__/            \___/ \_/ \______________________/ \__/
-|           |               |       |                |    |            |                |
-|       userinfo           host    port              |    |          query          fragment
-|    \________________________________/\_____________|____|/ \__/        \__/
-scheme                 |                          |    |    |    |          |
-name              authority                      |    |    |    |          |
-|                                             path   |    |    interpretable as keys
-|                                                    |    |
-|    \_______________________________________________|____|/       \____/     \_____/
-|                         |                          |    |          |           |
-scheme              hierarchical part                  |    |    interpretable as values
-name                                                  |    |
-|            path               interpretable as filename |
-|   ___________|____________                              |
-/ \ /                        \                             |
-urn:example:animal:ferret:nose               interpretable as extension
+  foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose
+  \_/   \_______________/ \_________/ \__/            \___/ \_/ \______________________/ \__/
+   |           |               |       |                |    |            |                |
+   |       userinfo           host    port              |    |          query          fragment
+   |    \________________________________/\_____________|____|/ \__/        \__/
+ scheme                 |                          |    |    |    |          |
+  name              authority                      |    |    |    |          |
+   |                                             path   |    |    interpretable as keys
+   |                                                    |    |
+   |    \_______________________________________________|____|/       \____/     \_____/
+   |                         |                          |    |          |           |
+ scheme              hierarchical part                  |    |    interpretable as values
+  name                                                  |    |
+   |            path               interpretable as filename |
+   |   ___________|____________                              |
+  / \ /                        \                             |
+  urn:example:animal:ferret:nose               interpretable as extension
 
-path
-_________|________
-scheme /                  \
-name  userinfo  hostname       query
-_|__   ___|__   ____|____   _____|_____
-/    \ /      \ /         \ /           \
-mailto:username@example.com?subject=Topic
+                path
+         _________|________
+ scheme /                  \
+  name  userinfo  hostname       query
+  _|__   ___|__   ____|____   _____|_____
+ /    \ /      \ /         \ /           \
+ mailto:username@example.com?subject=Topic
+
 
  */
 namespace cm {
