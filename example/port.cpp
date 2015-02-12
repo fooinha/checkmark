@@ -6,7 +6,7 @@
 #include <cm/net.h>
 
 
-int main(int argc, char **argv) {
+int main(int argc, char ** /*argv*/) {
 
 	bool with_exceptions = false;
 
@@ -58,8 +58,6 @@ int main(int argc, char **argv) {
 			}
 
 		}
-
-timings:
 
 		std::cout << " (" << std::setprecision(10) << std::fixed << cm::to_us(elapsed) << "µs)";
 		std::cout << std::endl;

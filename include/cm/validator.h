@@ -114,9 +114,9 @@ class range : public std::initializer_list<char> {
 		inline bool has_next() const { return (_count > 1 ); }
 
 
-		inline size_type size() const    { return _count; }
-		inline size_type count() const    { return _count; }
-		inline size_type offset() const   { return _offset; }
+		inline size_type get_size() const    { return _count; }
+		inline size_type get_count() const    { return _count; }
+		inline size_type get_offset() const   { return _offset; }
 
 		iterator begin() const            {
 			iterator it = std::remove_const<value_type>::type(_value).begin();

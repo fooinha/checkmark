@@ -76,7 +76,7 @@ template <class Clock = system_clock>
 			}
 			// Elapsed count for any duration rep
 			template<typename U>
-				typename U::rep elapsed() const {
+				typename U::rep get_elapsed() const {
 					return duration_cast<U>(
 							static_cast<typename Clock::duration>(*this)
 							).count();

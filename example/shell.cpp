@@ -19,7 +19,7 @@
 
 */
 
-int main(int arg, char **argv) {
+int main(int /* argc */, char ** /*argv*/) {
 
 	enum MODE {
 		M_URL = 0,
@@ -198,8 +198,6 @@ int main(int arg, char **argv) {
 
 		}
 		w.stop();
-
-timings:
 
 		std::cout << " (" << std::setprecision(10) << std::fixed << cm::to_us(elapsed) << "µs)";
 		std::cout << std::endl;

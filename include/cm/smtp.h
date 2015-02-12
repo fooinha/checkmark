@@ -214,7 +214,7 @@ class local_part : public error_check {
 			if (c == '.' || c == '&' || c == '_' || c == '-' ||
 					c == '=' || c == '/' || c == '+' ||
 					c == '$' || c == '\''|| c == '*' ||
-					c == '#' || c == '!' |
+					c == '#' || c == '!' ||
 					c == '?' || c == '`' || c == '{' || c == '}' ||
 					c == '|' || c == '~' || c == '^' ||
 					c == '%' //TODO: to check % encoding
@@ -465,7 +465,7 @@ class local_part : public error_check {
 
 						/* Consecutive quotes */
 						if (c=='"' && s.prev == '"' &&
-								( s.lqt + 1 )  == i ) {
+								( s.lqt + 1 )  == (int) i ) {
 							s.err = 8;
 							break;
 						}

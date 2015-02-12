@@ -19,11 +19,14 @@ endmacro()
 project(checkmark C CXX)
 set(PROJECT_VERSION 0.0.1)
 
-include_directories(include)
+set (CMAKE_CXX_FLAGS_DEBUG "-O0 -pedantic -g -Wall -Wshadow -Wunused-variable -Wunused-parameter -Wunused-function -Wunused -Wno-system-headers -Woverloaded-virtual -Wwrite-strings -Wdeprecated -Wdeprecated-declarations -Wno-variadic-macros" )
+set (CMAKE_C_FLAGS_DEBUG "-O0 -pedantic -g -Wall -Wshadow -Wno-unused-parameter -W  -Wno-unused-function -Wunused -Wno-system-headers -Wwrite-strings -Wdeprecated -Wdeprecated-declarations -Wno-variadic-macros" )
 add_definitions(-std=c++11)
 
 option(BUILD_EXT_EXAMPLES   "Builds the examples" ON)
 
+
+include_directories(include)
 #==========================================================================
 
 

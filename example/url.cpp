@@ -7,7 +7,7 @@
 #include <cm/url.h>
 
 
-int main(int argc, char **argv) {
+int main(int /* argc */, char ** /*argv*/) {
 	std::string line;
 
 	std::cout << "-----------------------------------------------------------------" << std::endl;
@@ -52,8 +52,6 @@ int main(int argc, char **argv) {
 			std::cerr << " ERR:" << ex.what();
 		}
 		w.stop();
-
-timings:
 
 		std::cout << " (" << std::setprecision(10) << std::fixed << cm::to_us(elapsed) << "µs)";
 		std::cout << std::endl;

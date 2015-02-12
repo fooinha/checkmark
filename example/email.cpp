@@ -6,7 +6,7 @@
 #include <cm/smtp.h>
 
 
-int main(int argc, char **argv) {
+int main(int argc, char ** /*argv*/) {
 
 	std::string line;
 
@@ -60,8 +60,6 @@ int main(int argc, char **argv) {
 			}
 
 		}
-
-timings:
 
 		std::cout << " (" << std::setprecision(10) << std::fixed << cm::to_us(elapsed) << "µs)";
 		std::cout << std::endl;

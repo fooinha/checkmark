@@ -5,10 +5,9 @@
 #include <cm/stopwatch.h>
 
 
-int main(int argc, char **argv) {
+int main(int /* argc */, char ** /*argv*/) {
 	constexpr std::chrono::milliseconds second( 1000 );
 	constexpr std::chrono::milliseconds half_sec( 500 );
-	auto n = pow(10, 6);
 
 	using namespace cm;
 
@@ -47,17 +46,17 @@ int main(int argc, char **argv) {
 			<< w.until_now().count() << std::endl;
 
 		std::cout << "μs > " << std::setprecision(8) <<
-			w.elapsed<std::chrono::microseconds>() << std::endl;
+			w.get_elapsed<std::chrono::microseconds>() << std::endl;
 
 		std::cout << "ms > " << std::setprecision(8) <<
-			w.elapsed<std::chrono::milliseconds>() << std::endl;
+			w.get_elapsed<std::chrono::milliseconds>() << std::endl;
 
 
 		std::cout << "ns > " << std::setprecision(8) <<
-			w.elapsed<std::chrono::nanoseconds>() << std::endl;
+			w.get_elapsed<std::chrono::nanoseconds>() << std::endl;
 
 		std::cout << "rs > " << std::setprecision(5) <<
-			w.elapsed<std::chrono::duration<float>>() << std::endl;
+			w.get_elapsed<std::chrono::duration<float>>() << std::endl;
 
 	}
 

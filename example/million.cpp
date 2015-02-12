@@ -7,7 +7,7 @@ void fn(){
 	std::cout << ".";
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char ** /*argv*/) {
 
 	cm::hires_stopwatch::duration elapsed;
 	{
